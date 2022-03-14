@@ -6,27 +6,126 @@
 #display {
     font-size: 40px;
     background-color: black;
-    width: 400px;
+    width: 340px;
     border-radius: 10px;
     color: goldenrod;
     text-align: right;
+    position: absolute;
+    right: 20px;
+    top: 15px;
 }
 
 #calculator {
     position: relative;
     background-color: darkgrey;
-    width: 480px;
-    height: 640px;
+    width: 380px;
+    height: 500px;
     border-radius: 5%;
     margin: auto;
 }
 
 .button {
     border-radius: 10%;
-    width: 120px;
-    height: 60px;
+    width: 100px;
+    height: 50px;
     margin: 10px;
+    position: absolute;
 }
 
+.number {
+    background-color: slategray;
+}
 
+.operator {
+    background-color: sandybrown;
+}
 
+#zero {
+    bottom: 10px;
+    left: 10px;
+}
+
+#equals {
+    bottom: 10px;
+    left: 250px;
+}
+
+#decimal {
+    bottom: 10px;
+    left: 130px;
+}
+
+#one {
+    bottom: 80px;
+    left: 10px;
+}
+
+#two {
+    bottom: 80px;
+    left: 130px;
+}
+
+#three {
+    bottom: 80px;
+    left: 250px;
+}
+
+#four {
+    bottom: 150px;
+    left: 10px;
+}
+
+#five {
+    bottom: 150px;
+    left: 130px;
+}
+
+#six {
+    bottom: 150px;
+    left: 250px;
+}
+
+#seven {
+    bottom: 220px;
+    left: 10px;
+}
+
+#eight {
+    bottom: 220px;
+    left: 130px;
+}
+
+#nine {
+    bottom: 220px;
+    left: 250px;
+}
+
+#clear {
+    bottom: 360px;
+    left: 250px;
+}
+
+#plus {
+    bottom: 290px;
+    left: 10px;
+}
+
+#minus {
+    bottom: 290px;
+    left: 130px;
+}
+
+#power {
+    bottom: 290px;
+    left: 250px;
+}
+
+#multiply {
+    bottom: 360px;
+    left: 10px;
+}
+
+#divide {
+    bottom: 360px;
+    left: 130px;
+}
