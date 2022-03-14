@@ -3,10 +3,18 @@
     font-size: 48px;
 }
 
+@font-face {
+    font-family: 'calcFont';
+    src: url('./Calculator.ttf');
+}
+
 #display {
     font-size: 40px;
+    font-weight: 500;
+    font-family: 'calcFont';
     background-color: black;
     width: 340px;
+    height: 45px;
     border-radius: 10px;
     color: goldenrod;
     text-align: right;

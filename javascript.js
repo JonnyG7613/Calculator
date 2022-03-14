@@ -1,3 +1,9 @@
+const display = document.getElementById('display');
+const numbers = document.getElementsByClassName('number');
+const operator = document.getElementsByClassName('operator');
+const clear = document.getElementById('clear');
+const equals = document.getElementById('equals');
+
 
 function sum(x, y) {
     return x + y;
@@ -39,5 +45,20 @@ function operation(num1, num2, operand) {
 }
 
 function clearDisplay() {
-
+    display.innerText = '';
+    console.log('clear');
 }
+
+function addToDisplay(num) {
+    display.innerText += num;
+    console.log(num);
+}
+
+
+for (let i = 0; i < numbers.length; i++) {
+    numbers[i].onclick = function () {
+        addToDisplay(numbers[i].innerText)
+    };
+}
+
+clear.onclick = clearDisplay;
