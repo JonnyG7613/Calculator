@@ -1,0 +1,32 @@
+#header {
+    text-align: center;
+    font-size: 48px;
+}
+
+#display {
+    font-size: 40px;
+    background-color: black;
+    width: 400px;
+    border-radius: 10px;
+    color: goldenrod;
+    text-align: right;
+}
+
+#calculator {
+    position: relative;
+    background-color: darkgrey;
+    width: 480px;
+    height: 640px;
+    border-radius: 5%;
+    margin: auto;
+}
+
+.button {
+    border-radius: 10%;
+    width: 120px;
+    height: 60px;
+    margin: 10px;
+}
+
+
+
