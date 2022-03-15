@@ -20,10 +20,10 @@ function quot(x, y) {
 function operation(num1, num2, operand) {
     switch (operand) {
         case '+':
-            return (parseFloat(num1) + parseFloat(num2));
+            return ((parseFloat(num1) + parseFloat(num2)) * 1000) / 1000;
             break;
         case '-':
-            return (num1 - num2);
+            return ((num1 - num2) * 1000) / 1000;
             break;
         case '*':
             return (num1 * num2);
@@ -42,15 +42,17 @@ function operation(num1, num2, operand) {
 }
 
 function answer() {
-    secondOperand = display.innerText;
+    // secondOperand = display.innerText;
     console.log(firstOperand);
     console.log(operatorSign);
     console.log(secondOperand);
     display.innerText = operation(firstOperand, secondOperand, operatorSign);
     fullDisplay = true;
     firstOperand = display.innerText;
-    console.log(firstOperand);
     secondOperand = '';
+    // operatorSign = ''; 
+    console.log(firstOperand);
+    console.log(secondOperand);
 }
 
 function clearDisplay() {
@@ -66,16 +68,19 @@ function addToDisplay(num) {
 
 for (let i = 0; i < operator.length; i++) {
     operator[i].onclick = function () {
+        // if (operatorSign == '') {
+        //     operatorSign = operator[i].innerText;
+        // }
         if (firstOperand !== '' && secondOperand !== '') {
-            operatorSign = operator[i].innerText;
             answer();
+            operatorSign = operator[i].innerText;
         } else if (firstOperand !== '' && secondOperand == '') {
             secondOperand = display.innerText;
-            operatorSign = operator[i].innerText;
             answer();
-        } else {
-            fullDisplay = false;
             operatorSign = operator[i].innerText;
+        } else {
+            operatorSign = operator[i].innerText;
+            fullDisplay = false;
             firstOperand = display.innerText;
             display.innerText = '';
         }
@@ -86,8 +91,10 @@ for (let i = 0; i < operator.length; i++) {
 for (let i = 0; i < numbers.length; i++) {
     numbers[i].onclick = function () {
         if (fullDisplay == true) {
-            display.innerText = '';
-            fullDisplay = false;
+            // display.innerText = '';
+            clearDisplay();
+            // fullDisplay = false;
+
         }
         addToDisplay(numbers[i].innerText)
     };
@@ -95,4 +102,7 @@ for (let i = 0; i < numbers.length; i++) {
 
 clear.onclick = clearDisplay;
 
-equals.onclick = answer;
+equals.onclick = function () {
+    secondOperand = display.innerText;
+    answer();
+}
