@@ -26,13 +26,13 @@ function operation(num1, num2, operand) {
             return ((num1 - num2) * 1000) / 1000;
             break;
         case '*':
-            return (num1 * num2);
+            return ((num1 * num2) * 1000) / 1000;
             break;
         case '/':
             return quot(num1, num2);
             break;
         case 'x^y':
-            return (num1 ** num2);
+            return ((num1 ** num2) * 1000) / 1000;
             break;
         default:
             return 'ERROR';
@@ -43,16 +43,17 @@ function operation(num1, num2, operand) {
 
 function answer() {
     // secondOperand = display.innerText;
-    console.log(firstOperand);
-    console.log(operatorSign);
-    console.log(secondOperand);
+    console.log('pre ' + firstOperand);
+    console.log('pre ' + operatorSign);
+    console.log('pre ' + secondOperand);
     display.innerText = operation(firstOperand, secondOperand, operatorSign);
     fullDisplay = true;
     firstOperand = display.innerText;
     secondOperand = '';
-    // operatorSign = ''; 
-    console.log(firstOperand);
-    console.log(secondOperand);
+    operatorSign = '';
+    console.log('post ' + firstOperand);
+    console.log('post ' + operatorSign);
+    console.log('post ' + secondOperand);
 }
 
 function clearDisplay() {
@@ -68,33 +69,30 @@ function addToDisplay(num) {
 
 for (let i = 0; i < operator.length; i++) {
     operator[i].onclick = function () {
-        // if (operatorSign == '') {
-        //     operatorSign = operator[i].innerText;
-        // }
-        if (firstOperand !== '' && secondOperand !== '') {
-            answer();
+        if (firstOperand !== '' && secondOperand == '') {
+            if (display.innerText !== '') {
+                secondOperand = display.innerText;
+                answer();
+            }
             operatorSign = operator[i].innerText;
-        } else if (firstOperand !== '' && secondOperand == '') {
-            secondOperand = display.innerText;
+        } else if (firstOperand !== '' && secondOperand !== '') {
             answer();
             operatorSign = operator[i].innerText;
         } else {
-            operatorSign = operator[i].innerText;
             fullDisplay = false;
+            operatorSign = operator[i].innerText;
             firstOperand = display.innerText;
             display.innerText = '';
         }
     }
 }
 
-
 for (let i = 0; i < numbers.length; i++) {
     numbers[i].onclick = function () {
         if (fullDisplay == true) {
-            // display.innerText = '';
-            clearDisplay();
-            // fullDisplay = false;
-
+            display.innerText = '';
+            firstOperand = '';
+            fullDisplay = false;
         }
         addToDisplay(numbers[i].innerText)
     };
