@@ -8,23 +8,6 @@ let secondOperand = '';
 let operatorSign = '';
 let fullDisplay = false;
 
-function sum(x, y) {
-    console.log(`${x} + ${y} = ${parseFloat(x) + parseFloat(y)}`)
-    console.log(typeof (x + y));
-    return (parseFloat(x) + parseFloat(y));
-}
-
-function diff(x, y) {
-    console.log(`${x} - ${y} = ${x - y}`)
-    console.log(typeof (x - y));
-    return (x - y);
-}
-
-function prod(x, y) {
-    console.log(`${x} * ${y} = ${x * y}`)
-    return x * y;
-}
-
 function quot(x, y) {
     if (y == 0) {
         return "ERROR";
@@ -34,32 +17,40 @@ function quot(x, y) {
     }
 }
 
-function expo(x, y) {
-    return x ** y;
-}
-
 function operation(num1, num2, operand) {
     switch (operand) {
         case '+':
-            return sum(num1, num2);
+            return (parseFloat(num1) + parseFloat(num2));
             break;
         case '-':
-            return diff(num1, num2);
+            return (num1 - num2);
             break;
         case '*':
-            return prod(num1, num2);
+            return (num1 * num2);
             break;
         case '/':
             return quot(num1, num2);
             break;
         case 'x^y':
-            return expo(num1, num2);
+            return (num1 ** num2);
             break;
         default:
             return 'ERROR';
     }
 
 
+}
+
+function answer() {
+    secondOperand = display.innerText;
+    console.log(firstOperand);
+    console.log(operatorSign);
+    console.log(secondOperand);
+    display.innerText = operation(firstOperand, secondOperand, operatorSign);
+    fullDisplay = true;
+    firstOperand = display.innerText;
+    console.log(firstOperand);
+    secondOperand = '';
 }
 
 function clearDisplay() {
@@ -71,22 +62,31 @@ function clearDisplay() {
 
 function addToDisplay(num) {
     display.innerText += num;
-    console.log(num);
 }
 
 for (let i = 0; i < operator.length; i++) {
     operator[i].onclick = function () {
-        fullDisplay = false;
-        operatorSign = operator[i].innerText;
-        firstOperand = display.innerText;
-        display.innerText = '';
+        if (firstOperand !== '' && secondOperand !== '') {
+            operatorSign = operator[i].innerText;
+            answer();
+        } else if (firstOperand !== '' && secondOperand == '') {
+            secondOperand = display.innerText;
+            operatorSign = operator[i].innerText;
+            answer();
+        } else {
+            fullDisplay = false;
+            operatorSign = operator[i].innerText;
+            firstOperand = display.innerText;
+            display.innerText = '';
+        }
     }
 }
+
 
 for (let i = 0; i < numbers.length; i++) {
     numbers[i].onclick = function () {
         if (fullDisplay == true) {
-            clearDisplay();
+            display.innerText = '';
             fullDisplay = false;
         }
         addToDisplay(numbers[i].innerText)
@@ -95,10 +95,4 @@ for (let i = 0; i < numbers.length; i++) {
 
 clear.onclick = clearDisplay;
 
-equals.onclick = function () {
-    secondOperand = display.innerText;
-    console.log(firstOperand);
-    display.innerText = operation(firstOperand, secondOperand, operatorSign);
-    fullDisplay = true;
-    firstOperand = display.innerText;
-}
+equals.onclick = answer;
