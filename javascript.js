@@ -42,6 +42,7 @@ function operation(num1, num2, operand) {
             return Math.round((num1 ** num2) * 1000) / 1000;
             break;
         default:
+            fullDisplay = true;
             return 'ERROR';
     }
 }
@@ -64,29 +65,37 @@ function answer(num1, num2, opSign) {
 
 for (let i = 0; i < operator.length; i++) {
     operator[i].onclick = function () {
-        if (operator[i].innerText == 'SqRt') {
-            display.innerText = Math.round((display.innerText ** 0.5) * 1000) / 1000;
-        } else {
-            if (recentEquation == false) {
-                if (firstOperand !== '') {
-                    upperDisplay.innerText = `${firstOperand} ${operatorSign} ${display.innerText}`;
-                    answer(firstOperand, display.innerText, operatorSign);
+        if (display.innerText = 'ERROR') { }
+        else {
+            if (operator[i].innerText == 'SqRt') {
+                if (display.innerText >= 0) {
+                    display.innerText = Math.round((display.innerText ** 0.5) * 1000) / 1000;
+                } else {
+                    display.innerText = 'ERROR';
+                    fullDisplay = true;
+                }
+            } else {
+                if (recentEquation == false) {
+                    if (firstOperand !== '') {
+                        upperDisplay.innerText = `${firstOperand} ${operatorSign} ${display.innerText}`;
+                        answer(firstOperand, display.innerText, operatorSign);
+                        operatorSign = operator[i].innerText;
+                        recentEquation = false;
+                        prevDecimal = false;
+                    } else {
+                        firstOperand = display.innerText;
+                        operatorSign = operator[i].innerText;
+                        fullDisplay = true;
+                        prevDecimal = false;
+                        upperDisplay.innerText = `${firstOperand} ${operatorSign}`;
+                    }
+                } else {
                     operatorSign = operator[i].innerText;
                     recentEquation = false;
-                    prevDecimal = false;
-                } else {
-                    firstOperand = display.innerText;
-                    operatorSign = operator[i].innerText;
                     fullDisplay = true;
                     prevDecimal = false;
                     upperDisplay.innerText = `${firstOperand} ${operatorSign}`;
                 }
-            } else {
-                operatorSign = operator[i].innerText;
-                recentEquation = false;
-                fullDisplay = true;
-                prevDecimal = false;
-                upperDisplay.innerText = `${firstOperand} ${operatorSign}`;
             }
         }
     }

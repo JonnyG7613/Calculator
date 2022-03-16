@@ -25,3 +25,5 @@ Ver 1.1 Changed size of the upper display to better fit the screen.
 Ver 1.1.1 Changed version number on page.
 
 Ver 1.1.2 Changed lower display to not cut off upper display on mobile devices.
+
+Ver 1.2 Fixed possible NaN error when taking the square root of a negative number. Fixed possible NaN error when performing an operation on an existing error.
