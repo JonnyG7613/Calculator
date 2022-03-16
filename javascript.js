@@ -4,6 +4,7 @@ const numbers = document.getElementsByClassName('number');
 const operator = document.getElementsByClassName('operator');
 const clear = document.getElementById('clear');
 const equals = document.getElementById('equals');
+let backspace = document.getElementById('backspace');
 let firstOperand = '';
 let secondOperand = '';
 let operatorSign = '';
@@ -31,7 +32,7 @@ function operation(num1, num2, operand) {
         case '-':
             return Math.round((num1 - num2) * 1000) / 1000;
             break;
-        case '*':
+        case 'x':
             return Math.round((num1 * num2) * 1000) / 1000;
             break;
         case '/':
@@ -63,26 +64,30 @@ function answer(num1, num2, opSign) {
 
 for (let i = 0; i < operator.length; i++) {
     operator[i].onclick = function () {
-        if (recentEquation == false) {
-            if (firstOperand !== '') {
-                upperDisplay.innerText = `${firstOperand} ${operatorSign} ${display.innerText}`;
-                answer(firstOperand, display.innerText, operatorSign);
+        if (operator[i].innerText == 'SqRt') {
+            display.innerText = Math.round((display.innerText ** 0.5) * 1000) / 1000;
+        } else {
+            if (recentEquation == false) {
+                if (firstOperand !== '') {
+                    upperDisplay.innerText = `${firstOperand} ${operatorSign} ${display.innerText}`;
+                    answer(firstOperand, display.innerText, operatorSign);
+                    operatorSign = operator[i].innerText;
+                    recentEquation = false;
+                    prevDecimal = false;
+                } else {
+                    firstOperand = display.innerText;
+                    operatorSign = operator[i].innerText;
+                    fullDisplay = true;
+                    prevDecimal = false;
+                    upperDisplay.innerText = `${firstOperand} ${operatorSign}`;
+                }
+            } else {
                 operatorSign = operator[i].innerText;
                 recentEquation = false;
-                prevDecimal = false;
-            } else {
-                firstOperand = display.innerText;
-                operatorSign = operator[i].innerText;
                 fullDisplay = true;
                 prevDecimal = false;
                 upperDisplay.innerText = `${firstOperand} ${operatorSign}`;
             }
-        } else {
-            operatorSign = operator[i].innerText;
-            recentEquation = false;
-            fullDisplay = true;
-            prevDecimal = false;
-            upperDisplay.innerText = `${firstOperand} ${operatorSign}`;
         }
     }
 }
@@ -147,3 +152,16 @@ equals.onclick = () => {
         }
     }
 };
+
+// Backspaces. If there's only 1 digit, changes display to 0 instead.
+backspace.onclick = () => {
+    if (fullDisplay == false) {
+        if (display.innerText.length > 1) {
+            display.innerText = display.innerText.slice(0, -1);
+        } else {
+            display.innerText = 0;
+        }
+    } else {
+        display.innerText = 0;
+    }
+}
