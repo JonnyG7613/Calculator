@@ -8,4 +8,6 @@ Ver 0.8: Increased the size and weight of the font on the buttons. Simplified co
 
 Ver 0.9 Corrected chaining operators together. Error when hitting equals multiple times.
 
-Ver 0.9.5 Erased a lot of convoluted code and redid most of the functions.
+Ver 0.9.5 Erased a lot of convoluted code and redid most of the functions. Cleaned up the code.  Minor CSS improvements. Out for testing before final implementation.
+
+Ver 0.9.6 Added Ver number in header of page.
