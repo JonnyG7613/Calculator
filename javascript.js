@@ -25,6 +25,9 @@ function quot(x, y) {
 
 // Checks which operation to use then performs said operation.
 function operation(num1, num2, operand) {
+    if (num1 == '.' || num2 == '.') {
+        return 'ERROR';
+    }
     switch (operand) {
         case '+':
             return Math.round((parseFloat(num1) + parseFloat(num2)) * 1000) / 1000;
