@@ -8,16 +8,35 @@
     src: url('./Calculator.ttf');
 }
 
-#display {
-    font-size: 40px;
+#upperDisplay, #lowerDisplay{
+    width: 320px;
+    background-color: black;
     font-weight: 500;
     font-family: 'calcFont';
-    background-color: black;
-    width: 340px;
-    height: 45px;
-    border-radius: 10px;
     color: goldenrod;
     text-align: right;
+    position: absolute;
+}
+
+#upperDisplay {
+    right: 30px;
+    top: 15px;
+    height: 35px;
+    font-size: 28px;
+}
+
+#lowerDisplay {
+    right: 30px;
+    top: 40px;
+    height: 60px;
+    font-size: 60px;
+}
+
+#display {
+    background-color: black;
+    width: 340px;
+    height: 95px;
+    border-radius: 10px;
     position: absolute;
     right: 20px;
     top: 15px;
@@ -27,7 +46,7 @@
     position: relative;
     background-color: darkgrey;
     width: 380px;
-    height: 500px;
+    height: 550px;
     border-radius: 5%;
     margin: auto;
     border: 2px solid black;

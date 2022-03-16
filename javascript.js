@@ -1,4 +1,5 @@
-const display = document.getElementById('display');
+const display = document.getElementById('lowerDisplay');
+const upperDisplay = document.getElementById('upperDisplay');
 const numbers = document.getElementsByClassName('number');
 const operator = document.getElementsByClassName('operator');
 const clear = document.getElementById('clear');
@@ -34,7 +35,7 @@ function operation(num1, num2, operand) {
         case '/':
             return quot(num1, num2);
             break;
-        case 'x^y':
+        case '^':
             return Math.round((num1 ** num2) * 1000) / 1000;
             break;
         default:
@@ -43,7 +44,13 @@ function operation(num1, num2, operand) {
 }
 
 function answer(num1, num2, opSign) {
-    display.innerText = operation(num1, num2, opSign);
+    upperDisplay.innerText = `${num1} ${opSign} ${num2}`;
+    let tempAnswer = operation(num1, num2, opSign);
+    if (tempAnswer > 99999999999) {
+        display.innerText = tempAnswer.toExponential(4);
+    } else {
+        display.innerText = tempAnswer;
+    }
     recentEquation = true;
     fullDisplay = true;
     firstOperand = display.innerText;
@@ -55,6 +62,7 @@ for (let i = 0; i < operator.length; i++) {
     operator[i].onclick = function () {
         if (recentEquation == false) {
             if (firstOperand !== '') {
+                upperDisplay.innerText = `${firstOperand} ${operatorSign} ${display.innerText}`;
                 answer(firstOperand, display.innerText, operatorSign);
                 operatorSign = operator[i].innerText;
                 recentEquation = false;
@@ -62,11 +70,13 @@ for (let i = 0; i < operator.length; i++) {
                 firstOperand = display.innerText;
                 operatorSign = operator[i].innerText;
                 fullDisplay = true;
+                upperDisplay.innerText = `${firstOperand} ${operatorSign}`;
             }
         } else {
             operatorSign = operator[i].innerText;
             recentEquation = false;
             fullDisplay = true;
+            upperDisplay.innerText = `x${firstOperand} ${operatorSign}`;
         }
     }
 }
@@ -74,17 +84,26 @@ for (let i = 0; i < operator.length; i++) {
 for (let i = 0; i < numbers.length; i++) {
     numbers[i].onclick = function () {
         if (fullDisplay == true) {
+            if (recentEquation == true) {
+                firstOperand = '';
+                recentEquation = false;
+            }
             display.innerText = '';
             fullDisplay = false;
         }
-        display.innerText += numbers[i].innerText;
+        if (display.innerText.length < 9) {
+            display.innerText += numbers[i].innerText;
+        } else {
+            upperDisplay.innerText = 'Display maxed.';
+        }
     };
 }
 
 clear.onclick = () => {
-    fullDisplay = false;
+    fullDisplay = true;
     recentEquation = false;
     display.innerText = '0';
+    upperDisplay.innerText = '';
     firstOperand = '';
     secondOperand = '';
     operatorSign = '';
@@ -92,6 +111,8 @@ clear.onclick = () => {
 
 equals.onclick = () => {
     if (recentEquation == false) {
-        answer(firstOperand, display.innerText, operatorSign);
+        if (firstOperand !== '' && operatorSign !== '') {
+            answer(firstOperand, display.innerText, operatorSign);
+        }
     }
 };

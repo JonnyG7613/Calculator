@@ -11,3 +11,5 @@ Ver 0.9 Corrected chaining operators together. Error when hitting equals multipl
 Ver 0.9.5 Erased a lot of convoluted code and redid most of the functions. Cleaned up the code.  Minor CSS improvements. Out for testing before final implementation.
 
 Ver 0.9.6 Added Ver number in header of page.
+
+Ver 0.9.7 Added upper and lower displays.  Upper display will show previous equation entered.  Also fixed some internal logic that stored variables incorrectly.  Also set display to handle nine digits before maxing out to prevent overrun of display.  Fixed some minor bugs involving overrun of the display (the y in infinity, scientific notation, etc).
