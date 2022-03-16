@@ -7,3 +7,5 @@ Ver 0.7: Added equals functionality, including the ability to perform an operati
 Ver 0.8: Increased the size and weight of the font on the buttons. Simplified code by removing redundant functions. Added the ability to chain operators, but created a bug that swaps the operator with another if you click on a different operator.
 
 Ver 0.9 Corrected chaining operators together. Error when hitting equals multiple times.
+
+Ver 0.9.5 Erased a lot of convoluted code and redid most of the functions.
