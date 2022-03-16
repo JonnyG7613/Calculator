@@ -12,6 +12,7 @@ let previousOperator = '';
 let previousSecondOperand = '';
 display.innerText = 0;
 let recentEquation = false;
+let prevDecimal = false;
 
 function quot(x, y) {
     if (y == 0) {
@@ -21,6 +22,7 @@ function quot(x, y) {
     }
 }
 
+// Checks which operation to use then performs said operation.
 function operation(num1, num2, operand) {
     switch (operand) {
         case '+':
@@ -43,6 +45,7 @@ function operation(num1, num2, operand) {
     }
 }
 
+// Takes parameters, solves the equation and sets values for following operands/operators.
 function answer(num1, num2, opSign) {
     upperDisplay.innerText = `${num1} ${opSign} ${num2}`;
     let tempAnswer = operation(num1, num2, opSign);
@@ -66,39 +69,64 @@ for (let i = 0; i < operator.length; i++) {
                 answer(firstOperand, display.innerText, operatorSign);
                 operatorSign = operator[i].innerText;
                 recentEquation = false;
+                prevDecimal = false;
             } else {
                 firstOperand = display.innerText;
                 operatorSign = operator[i].innerText;
                 fullDisplay = true;
+                prevDecimal = false;
                 upperDisplay.innerText = `${firstOperand} ${operatorSign}`;
             }
         } else {
             operatorSign = operator[i].innerText;
             recentEquation = false;
             fullDisplay = true;
-            upperDisplay.innerText = `x${firstOperand} ${operatorSign}`;
+            prevDecimal = false;
+            upperDisplay.innerText = `${firstOperand} ${operatorSign}`;
         }
     }
 }
 
+// Checks if a decimal is pressed - if not, it proceeds to add the number to the display
+// or perform an operation, as needed.  If a decimal is pressed, as long as there isn't
+// already a decimal present, the display will insert a decimal, otherwise nothing happens.
 for (let i = 0; i < numbers.length; i++) {
     numbers[i].onclick = function () {
-        if (fullDisplay == true) {
-            if (recentEquation == true) {
-                firstOperand = '';
-                recentEquation = false;
+        if (numbers[i].innerText == '.' && prevDecimal == false) {
+            if (fullDisplay == true) {
+                if (recentEquation == true) {
+                    firstOperand = '';
+                    recentEquation = false;
+                }
+                display.innerText = '';
+                fullDisplay = false;
             }
-            display.innerText = '';
-            fullDisplay = false;
-        }
-        if (display.innerText.length < 9) {
-            display.innerText += numbers[i].innerText;
-        } else {
-            upperDisplay.innerText = 'Display maxed.';
+            if (display.innerText.length < 9) {
+                display.innerText += numbers[i].innerText;
+            } else {
+                upperDisplay.innerText = 'Display maxed.';
+            }
+            prevDecimal = true;
+        } else if (numbers[i].innerText == '.' && prevDecimal == true) { }
+        else {
+            if (fullDisplay == true) {
+                if (recentEquation == true) {
+                    firstOperand = '';
+                    recentEquation = false;
+                }
+                display.innerText = '';
+                fullDisplay = false;
+            }
+            if (display.innerText.length < 9) {
+                display.innerText += numbers[i].innerText;
+            } else {
+                upperDisplay.innerText = 'Display maxed.';
+            }
         }
     };
 }
 
+// Clears all values and the display.
 clear.onclick = () => {
     fullDisplay = true;
     recentEquation = false;
@@ -107,11 +135,14 @@ clear.onclick = () => {
     firstOperand = '';
     secondOperand = '';
     operatorSign = '';
+    prevDecimal = false;
 }
 
+// Solves the equation entered as long as all parameters are present.
 equals.onclick = () => {
     if (recentEquation == false) {
         if (firstOperand !== '' && operatorSign !== '') {
+            prevDecimal = false;
             answer(firstOperand, display.innerText, operatorSign);
         }
     }
