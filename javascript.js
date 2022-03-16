@@ -43,6 +43,7 @@ function operation(num1, num2, operand) {
             break;
         default:
             fullDisplay = true;
+            console.log(2);
             return 'ERROR';
     }
 }
@@ -65,12 +66,13 @@ function answer(num1, num2, opSign) {
 
 for (let i = 0; i < operator.length; i++) {
     operator[i].onclick = function () {
-        if (display.innerText = 'ERROR') { }
+        if (display.innerText == 'ERROR') { }
         else {
             if (operator[i].innerText == 'SqRt') {
                 if (display.innerText >= 0) {
                     display.innerText = Math.round((display.innerText ** 0.5) * 1000) / 1000;
                 } else {
+                    console.log(1);
                     display.innerText = 'ERROR';
                     fullDisplay = true;
                 }
