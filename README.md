@@ -15,3 +15,5 @@ Ver 0.9.6 Added Ver number in header of page.
 Ver 0.9.7 Added upper and lower displays.  Upper display will show previous equation entered.  Also fixed some internal logic that stored variables incorrectly.  Also set display to handle nine digits before maxing out to prevent overrun of display.  Fixed some minor bugs involving overrun of the display (the y in infinity, scientific notation, etc).
 
 Ver 0.9.8 Removed the ability to put in multiple decimal points.  Added comments inside code.
+
+Ver 0.9.9 Added backspace and square root buttons.  Changed size of buttons in CSS to fit extra buttons.

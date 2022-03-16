@@ -57,8 +57,8 @@
     font-size: 20px;
     font-weight: 500;
     border-radius: 10%;
-    width: 100px;
-    height: 50px;
+    width: 70px;
+    height: 60px;
     margin: 10px;
     position: absolute;
 }
@@ -76,87 +76,97 @@
     left: 10px;
 }
 
+#backspace {
+    bottom: 10px;
+    left: 190px;
+}
+
 #equals {
     bottom: 10px;
-    left: 250px;
+    left: 280px;
 }
 
 #decimal {
     bottom: 10px;
-    left: 130px;
+    left: 100px;
 }
 
 #one {
-    bottom: 80px;
+    bottom: 90px;
     left: 10px;
 }
 
 #two {
-    bottom: 80px;
-    left: 130px;
+    bottom: 90px;
+    left: 100px;
 }
 
 #three {
-    bottom: 80px;
-    left: 250px;
+    bottom: 90px;
+    left: 190px;
+}
+
+#plus {
+    bottom: 90px;
+    left: 280px;
 }
 
 #four {
-    bottom: 150px;
+    bottom: 170px;
     left: 10px;
 }
 
 #five {
-    bottom: 150px;
-    left: 130px;
+    bottom: 170px;
+    left: 100px;
 }
 
 #six {
-    bottom: 150px;
-    left: 250px;
+    bottom: 170px;
+    left: 190px;
+}
+
+#minus {
+    bottom: 170px;
+    left: 280px;
 }
 
 #seven {
-    bottom: 220px;
+    bottom: 250px;
     left: 10px;
 }
 
 #eight {
-    bottom: 220px;
-    left: 130px;
+    bottom: 250px;
+    left: 100px;
 }
 
 #nine {
-    bottom: 220px;
-    left: 250px;
-}
-
-#clear {
-    bottom: 360px;
-    left: 250px;
-}
-
-#plus {
-    bottom: 290px;
-    left: 10px;
-}
-
-#minus {
-    bottom: 290px;
-    left: 130px;
-}
-
-#power {
-    bottom: 290px;
-    left: 250px;
+    bottom: 250px;
+    left: 190px;
 }
 
 #multiply {
-    bottom: 360px;
+    bottom: 250px;
+    left: 280px;
+}
+
+#clear {
+    bottom: 330px;
     left: 10px;
 }
 
+#sqroot {
+    bottom: 330px;
+    left: 100px;
+}
+
+#power {
+    bottom: 330px;
+    left: 190px;
+}
+
 #divide {
-    bottom: 360px;
-    left: 130px;
+    bottom: 330px;
+    left: 280px;
 }
