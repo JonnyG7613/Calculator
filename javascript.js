@@ -79,6 +79,7 @@ function answer(num1, num2, opSign) {
 
 function enterNumbers(number) {
     if (fullDisplay == true && recentEquation == true) {
+        display.innerText = '';
         firstOperand = '';
         fullDisplay = false;
         recentEquation = false;
