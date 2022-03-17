@@ -37,3 +37,5 @@ Ver 1.3 Simplified code, eliminated multiple nestings.
 Ver 1.3.1 Fixed being able to add numbers to the 'ERROR' message.
 
 Ver 1.4 Removed SqRt button and added a +/- button. Squashed bug where hitting an operator would cause an operation to run where the first and second variables were the same.  Squashed bug where trying to perform an operation with '-' as an operand would return a NaN error.
+
+Ver 1.4.1 One day I will remember to update the version number on the HTML doc.
