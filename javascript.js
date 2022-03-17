@@ -4,7 +4,8 @@ const numbers = document.getElementsByClassName('number');
 const operator = document.getElementsByClassName('operator');
 const clear = document.getElementById('clear');
 const equals = document.getElementById('equals');
-let backspace = document.getElementById('backspace');
+const backspace = document.getElementById('backspace');
+const negSwitch = document.getElementById('negSwitch')
 let firstOperand = '';
 let secondOperand = '';
 let operatorSign = '';
@@ -24,18 +25,17 @@ function quot(x, y) {
     }
 }
 
-function squareRoot(x) {
-    if (x >= 0) {
-        display.innerText = Math.round((display.innerText ** 0.5) * 1000) / 1000;
+function negativeSwitch(x) {
+    if (display.innerText.charAt(0) == '-') {
+        display.innerText = display.innerText.substring(1);
     } else {
-        display.innerText = 'ERROR';
-        fullDisplay = true;
+        display.innerText = '-' + display.innerText;
     }
 }
 
 // Checks which operation to use then performs said operation.
 function operation(num1, num2, operand) {
-    if (num1 == '.' || num2 == '.') {
+    if (num1 == '.' || num2 == '.' || num1 == '-' || num2 == '-') {
         return 'ERROR';
     }
     switch (operand) {
@@ -95,16 +95,17 @@ function enterNumbers(number) {
     }
 }
 
+// erases one digit at a time. if one digit left, sets it to 0
 function erase() {
     if (fullDisplay == false && display.innerText.length > 1) {
         display.innerText = display.innerText.slice(0, -1);
-    } else if (fullDisplay == false) {
-        display.innerText = 0;
     } else {
         display.innerText = 0;
+        fullDisplay = true;
     }
 }
 
+// solves the equation if all paramters are available
 function solve() {
     if (recentEquation == false && firstOperand !== '' && operatorSign !== '') {
         prevDecimal = false;
@@ -115,13 +116,11 @@ function solve() {
 for (let i = 0; i < operator.length; i++) {
     operator[i].onclick = function () {
         if (display.innerText !== 'ERROR') {
-            if (operator[i].innerText == 'SqRt') {
-                squareRoot(display.innerText);
-            } else if (recentEquation == false && firstOperand !== '') {
+            if (recentEquation == false && firstOperand !== '') {
                 upperDisplay.innerText = `${firstOperand} ${operatorSign} ${display.innerText}`;
                 answer(firstOperand, display.innerText, operatorSign);
                 operatorSign = operator[i].innerText;
-                recentEquation = false;
+                recentEquation = true;
                 prevDecimal = false;
             } else if (recentEquation == false) {
                 firstOperand = display.innerText;
@@ -129,12 +128,14 @@ for (let i = 0; i < operator.length; i++) {
                 fullDisplay = true;
                 prevDecimal = false;
                 upperDisplay.innerText = `${firstOperand} ${operatorSign}`;
+                display.innerText = 0;
             } else {
                 operatorSign = operator[i].innerText;
                 recentEquation = false;
                 fullDisplay = true;
                 prevDecimal = false;
                 upperDisplay.innerText = `${firstOperand} ${operatorSign}`;
+                display.innerText = 0;
             }
         }
     }
@@ -165,6 +166,14 @@ clear.onclick = () => {
     secondOperand = '';
     operatorSign = '';
     prevDecimal = false;
+}
+
+// Changes number from positive to negative and vice versa
+negSwitch.onclick = () => {
+    if (display.innerText !== 'ERROR') {
+        console.log(1);
+        negativeSwitch();
+    }
 }
 
 // Solves the equation entered as long as all parameters are present.

@@ -35,3 +35,5 @@ Ver 1.2.2 Fixed error when calculating with a '.' as an operand.
 Ver 1.3 Simplified code, eliminated multiple nestings.
 
 Ver 1.3.1 Fixed being able to add numbers to the 'ERROR' message.
+
+Ver 1.4 Removed SqRt button and added a +/- button. Squashed bug where hitting an operator would cause an operation to run where the first and second variables were the same.  Squashed bug where trying to perform an operation with '-' as an operand would return a NaN error.
