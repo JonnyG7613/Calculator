@@ -17,9 +17,19 @@ let prevDecimal = false;
 
 function quot(x, y) {
     if (y == 0) {
+        fullDisplay = true;
         return "ERROR";
     } else {
         return Math.round((x / y) * 1000) / 1000;
+    }
+}
+
+function squareRoot(x) {
+    if (x >= 0) {
+        display.innerText = Math.round((display.innerText ** 0.5) * 1000) / 1000;
+    } else {
+        display.innerText = 'ERROR';
+        fullDisplay = true;
     }
 }
 
@@ -67,40 +77,63 @@ function answer(num1, num2, opSign) {
     operatorSign = '';
 }
 
+function enterNumbers(number) {
+    if (fullDisplay == true && recentEquation == true) {
+        firstOperand = '';
+        fullDisplay = false;
+        recentEquation = false;
+    } else if (fullDisplay == true) {
+        display.innerText = '';
+        fullDisplay = false;
+    }
+
+    if (display.innerText.length < 9) {
+        display.innerText += number.innerText;
+    } else {
+        upperDisplay.innerText = 'Display maxed.';
+    }
+}
+
+function erase() {
+    if (fullDisplay == false && display.innerText.length > 1) {
+        display.innerText = display.innerText.slice(0, -1);
+    } else if (fullDisplay == false) {
+        display.innerText = 0;
+    } else {
+        display.innerText = 0;
+    }
+}
+
+function solve() {
+    if (recentEquation == false && firstOperand !== '' && operatorSign !== '') {
+        prevDecimal = false;
+        answer(firstOperand, display.innerText, operatorSign);
+    }
+}
+
 for (let i = 0; i < operator.length; i++) {
     operator[i].onclick = function () {
-        if (display.innerText == 'ERROR') { }
-        else {
+        if (display.innerText !== 'ERROR') {
             if (operator[i].innerText == 'SqRt') {
-                if (display.innerText >= 0) {
-                    display.innerText = Math.round((display.innerText ** 0.5) * 1000) / 1000;
-                } else {
-                    console.log(1);
-                    display.innerText = 'ERROR';
-                    fullDisplay = true;
-                }
+                squareRoot(display.innerText);
+            } else if (recentEquation == false && firstOperand !== '') {
+                upperDisplay.innerText = `${firstOperand} ${operatorSign} ${display.innerText}`;
+                answer(firstOperand, display.innerText, operatorSign);
+                operatorSign = operator[i].innerText;
+                recentEquation = false;
+                prevDecimal = false;
+            } else if (recentEquation == false) {
+                firstOperand = display.innerText;
+                operatorSign = operator[i].innerText;
+                fullDisplay = true;
+                prevDecimal = false;
+                upperDisplay.innerText = `${firstOperand} ${operatorSign}`;
             } else {
-                if (recentEquation == false) {
-                    if (firstOperand !== '') {
-                        upperDisplay.innerText = `${firstOperand} ${operatorSign} ${display.innerText}`;
-                        answer(firstOperand, display.innerText, operatorSign);
-                        operatorSign = operator[i].innerText;
-                        recentEquation = false;
-                        prevDecimal = false;
-                    } else {
-                        firstOperand = display.innerText;
-                        operatorSign = operator[i].innerText;
-                        fullDisplay = true;
-                        prevDecimal = false;
-                        upperDisplay.innerText = `${firstOperand} ${operatorSign}`;
-                    }
-                } else {
-                    operatorSign = operator[i].innerText;
-                    recentEquation = false;
-                    fullDisplay = true;
-                    prevDecimal = false;
-                    upperDisplay.innerText = `${firstOperand} ${operatorSign}`;
-                }
+                operatorSign = operator[i].innerText;
+                recentEquation = false;
+                fullDisplay = true;
+                prevDecimal = false;
+                upperDisplay.innerText = `${firstOperand} ${operatorSign}`;
             }
         }
     }
@@ -112,37 +145,13 @@ for (let i = 0; i < operator.length; i++) {
 for (let i = 0; i < numbers.length; i++) {
     numbers[i].onclick = function () {
         if (numbers[i].innerText == '.' && prevDecimal == false) {
-            if (fullDisplay == true) {
-                if (recentEquation == true) {
-                    firstOperand = '';
-                    recentEquation = false;
-                }
-                display.innerText = '';
-                fullDisplay = false;
-            }
-            if (display.innerText.length < 9) {
-                display.innerText += numbers[i].innerText;
-            } else {
-                upperDisplay.innerText = 'Display maxed.';
-            }
+            enterNumbers(numbers[i]);
             prevDecimal = true;
         } else if (numbers[i].innerText == '.' && prevDecimal == true) { }
         else {
-            if (fullDisplay == true) {
-                if (recentEquation == true) {
-                    firstOperand = '';
-                    recentEquation = false;
-                }
-                display.innerText = '';
-                fullDisplay = false;
-            }
-            if (display.innerText.length < 9) {
-                display.innerText += numbers[i].innerText;
-            } else {
-                upperDisplay.innerText = 'Display maxed.';
-            }
+            enterNumbers(numbers[i]);
         }
-    };
+    }
 }
 
 // Clears all values and the display.
@@ -158,24 +167,7 @@ clear.onclick = () => {
 }
 
 // Solves the equation entered as long as all parameters are present.
-equals.onclick = () => {
-    if (recentEquation == false) {
-        if (firstOperand !== '' && operatorSign !== '') {
-            prevDecimal = false;
-            answer(firstOperand, display.innerText, operatorSign);
-        }
-    }
-};
+equals.onclick = solve;
 
 // Backspaces. If there's only 1 digit, changes display to 0 instead.
-backspace.onclick = () => {
-    if (fullDisplay == false) {
-        if (display.innerText.length > 1) {
-            display.innerText = display.innerText.slice(0, -1);
-        } else {
-            display.innerText = 0;
-        }
-    } else {
-        display.innerText = 0;
-    }
-}
+backspace.onclick = erase;

@@ -31,3 +31,5 @@ Ver 1.2 Fixed possible NaN error when taking the square root of a negative numbe
 Ver 1.2.1 Fixed error where all operations produced ERROR message.
 
 Ver 1.2.2 Fixed error when calculating with a '.' as an operand.
+
+Ver 1.3 Simplified code, eliminated multiple nestings.
